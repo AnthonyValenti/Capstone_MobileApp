@@ -1,5 +1,8 @@
-import 'dart:ui';
-
+import 'package:flutter_application_1/commutePage.dart';
+import 'package:flutter_application_1/meetingsPage.dart';
+import 'package:flutter_application_1/officePage.dart';
+import 'package:flutter_application_1/teamPage.dart';
+import 'package:flutter_application_1/weatherPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,116 +15,95 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Smart Notification System'),
-            backgroundColor: Colors.grey,
+        home: Scaffold(
+      appBar: AppBar(
+        title: const Text('Smart Notification System',
+            style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+        backgroundColor: Colors.grey,
+      ),
+      body: const MyStatefulWidget(),
+    ));
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle style = ElevatedButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        fixedSize: const Size(300, 80));
+
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ElevatedButton(
+            style: style,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WeatherPage()),
+              );
+            },
+            child: const Text('Weather'),
           ),
-          body: Column(
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              const Center(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: SizedBox(
-                          width: 380.0,
-                          height: 100.0,
-                          // ignore: unnecessary_const
-                          child: const DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Text(
-                              'Weather',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          )))),
-              const Center(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: SizedBox(
-                          width: 380.0,
-                          height: 100.0,
-                          // ignore: unnecessary_const
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Text(
-                              'Meetings',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          )))),
-              const Center(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: SizedBox(
-                          width: 380.0,
-                          height: 100.0,
-                          // ignore: unnecessary_const
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Text(
-                              'Team',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          )))),
-              const Center(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: SizedBox(
-                          width: 380.0,
-                          height: 100.0,
-                          // ignore: unnecessary_const
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Text(
-                              'Traffic',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          )))),
-              const Center(
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      child: SizedBox(
-                          width: 380.0,
-                          height: 100.0,
-                          // ignore: unnecessary_const
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                            ),
-                            child: Text(
-                              'Office',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          )))),
-            ],
-          )),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            style: style,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MeetingsPage()),
+              );
+            },
+            child: const Text('Meetings'),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            style: style,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TeamPage()),
+              );
+            },
+            child: const Text('Team'),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            style: style,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CommutePage()),
+              );
+            },
+            child: const Text('Commute'),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            style: style,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OfficePage()),
+              );
+            },
+            child: const Text('Office'),
+          ),
+        ],
+      ),
     );
   }
 }
