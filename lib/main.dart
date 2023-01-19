@@ -1,8 +1,8 @@
-import 'package:flutter_application_1/commutePage.dart';
-import 'package:flutter_application_1/meetingsPage.dart';
-import 'package:flutter_application_1/officePage.dart';
-import 'package:flutter_application_1/teamPage.dart';
-import 'package:flutter_application_1/weatherPage.dart';
+import 'package:flutter_application_1/pages/commute_page.dart';
+import 'package:flutter_application_1/pages/meetings_page.dart';
+import 'package:flutter_application_1/pages/office_page.dart';
+import 'package:flutter_application_1/pages/team_page.dart';
+import 'package:flutter_application_1/pages/weather_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
