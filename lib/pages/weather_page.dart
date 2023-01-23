@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:weather/weather.dart';
 
-WeatherFactory wf = new WeatherFactory("618774ba56bdfedf15cce5001b815715");
+WeatherFactory wf = WeatherFactory("618774ba56bdfedf15cce5001b815715");
 
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
@@ -79,33 +80,25 @@ class _TempState extends State<WeatherStates> {
         children: <Widget>[
           ElevatedButton(
             style: style,
-            onPressed: () {
-              getWeather();
-            },
+            onPressed: () {},
             child: Text("Current: $_currTemp °C"),
           ),
           const SizedBox(height: 70),
           ElevatedButton(
             style: style,
-            onPressed: () {
-              getWeather();
-            },
+            onPressed: () {},
             child: Text("Feels Like: $_feelsLike °C"),
           ),
           const SizedBox(height: 70),
           ElevatedButton(
             style: style,
-            onPressed: () {
-              getWeather();
-            },
+            onPressed: () {},
             child: Text("Min: $_minTemp °C"),
           ),
           const SizedBox(height: 70),
           ElevatedButton(
             style: style,
-            onPressed: () {
-              getWeather();
-            },
+            onPressed: () {},
             child: Text("Max: $_maxTemp °C"),
           ),
           const SizedBox(height: 70),
