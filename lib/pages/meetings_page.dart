@@ -16,7 +16,7 @@ class MeetingsPage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          "MEETINGS",
+          "Meetings",
           style: TextStyle(
               fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black),
         ),
