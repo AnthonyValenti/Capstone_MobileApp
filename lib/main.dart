@@ -1,10 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/pages/home_page.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'authentication.dart';
 import 'firebase_options.dart';
-import 'package:flutter_application_1/pages/commute_page.dart';
-import 'package:flutter_application_1/pages/meetings_page.dart';
-import 'package:flutter_application_1/pages/office_page.dart';
-import 'package:flutter_application_1/pages/team_page.dart';
-import 'package:flutter_application_1/pages/weather_page.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -23,91 +23,86 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Notification System',
+        title: const Text('Login',
             style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
         backgroundColor: Colors.grey,
       ),
-      body: const MyStatefulWidget(),
+      body: const GoogleSignInWidget(),
     ));
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
+class GoogleSignInWidget extends StatefulWidget {
+  const GoogleSignInWidget({super.key});
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<GoogleSignInWidget> createState() => _GoogleSignInWidgetState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
+  bool signedIn = false;
+  User? user;
+  String? name = "";
+
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
-        textStyle: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        fixedSize: const Size(300, 80));
-
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const WeatherPage()),
-              );
-            },
-            child: const Text('Weather'),
+          const Text(
+            "Welcome!",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MeetingsPage()),
-              );
-            },
-            child: const Text('Meetings'),
+          const SizedBox(height: 50),
+          const Text(
+            "Login to continue",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TeamPage()),
-              );
-            },
-            child: const Text('Team'),
-          ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CommutePage()),
-              );
-            },
-            child: const Text('Commute'),
-          ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const OfficePage()),
-              );
-            },
-            child: const Text('Office'),
-          ),
+          const SizedBox(height: 200),
+          SizedBox(
+              width: 300,
+              height: 80,
+              child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: SignInButton(
+                    Buttons.Google,
+                    onPressed: () async {
+                      try {
+                        user = await Authentication.signInWithGoogle(
+                            context: context);
+
+                        if (user != null && mounted) {
+                          setState(() {
+                            signedIn = true;
+                            name = user!.displayName;
+                          });
+                          print(user?.displayName);
+                        }
+                      } catch (e) {
+                        if (e is FirebaseAuthException) {
+                          print(e.message!);
+                        }
+                      }
+                      if (signedIn == true) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.pop(context);
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
+                      }
+                    },
+                  ))),
+          const SizedBox(height: 100),
         ],
       ),
     );

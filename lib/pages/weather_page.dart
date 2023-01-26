@@ -67,11 +67,11 @@ class _TempState extends State<WeatherStates> {
     getWeather();
     final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(
-        fontSize: 35,
+        fontSize: 25,
         fontWeight: FontWeight.bold,
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      fixedSize: const Size(400, 100),
+      fixedSize: const Size(350, 100),
     );
 
     return Center(

@@ -23,7 +23,7 @@ class Authentication {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      print(user);
+      print(user.displayName);
     }
 
     return firebaseApp;
