@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "824674209913",
+    "firebase_url": "https://capstone-mobile-app-375221-default-rtdb.firebaseio.com",
     "project_id": "capstone-mobile-app-375221",
     "storage_bucket": "capstone-mobile-app-375221.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:824674209913:android:3aa2037103d643024744a8",
+        "mobilesdk_app_id": "1:824674209913:android:d84101777cc67fc14744a8",
         "android_client_info": {
           "package_name": "com.example.flutter_application_1"
         }
