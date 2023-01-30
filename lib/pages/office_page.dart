@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OfficePage extends StatelessWidget {
   const OfficePage({super.key});
@@ -32,6 +33,25 @@ class _SwitchExampleState extends State<SwitchExample> {
   bool light1 = true;
   bool light2 = true;
   bool light3 = true;
+
+  static const platform1 = MethodChannel('capstone.flutter.lights.on');
+  static const platform2 = MethodChannel('capstone.flutter.lights.off');
+
+  Future<void> lightsOn() async {
+    try {
+      await platform1.invokeMethod('lightsOn');
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> lightsOff() async {
+    try {
+      await platform2.invokeMethod('lightsOff');
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +128,12 @@ class _SwitchExampleState extends State<SwitchExample> {
                       setState(() {
                         light3 = value;
                       });
+                      if (light3 == true) {
+                        lightsOn();
+                      }
+                      if (light3 == false) {
+                        lightsOff();
+                      }
                     },
                   ))),
           const SizedBox(height: 70),
