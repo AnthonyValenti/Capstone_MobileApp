@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^4.2.5
   google_sign_in: ^5.4.3
   flutter_signin_button: ^2.0.0
+  syncfusion_flutter_calendar: ^20.4.49
 
 
 

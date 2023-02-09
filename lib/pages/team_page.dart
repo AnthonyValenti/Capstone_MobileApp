@@ -12,7 +12,7 @@ class TeamPage extends StatelessWidget {
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey.shade500,
       ),
       body: const Center(
         child: Text("Team"),
