@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+final db = FirebaseFirestore.instance;
 
 class MeetingsPage extends StatelessWidget {
   const MeetingsPage({super.key});
@@ -35,6 +38,12 @@ class _EventStates extends State<Events> {
       fixedSize: const Size(150, 80),
       backgroundColor: Colors.blueGrey.shade500,
     );
+    final ButtonStyle style2 = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      fixedSize: const Size(150, 50),
+      backgroundColor: Colors.blueGrey.shade200,
+    );
     return SingleChildScrollView(
         child: Column(
       children: <Widget>[
@@ -53,7 +62,146 @@ class _EventStates extends State<Events> {
             width: 10,
           ),
           ElevatedButton(
-              style: style, onPressed: () {}, child: const Text('Add')),
+              style: style,
+              onPressed: () {
+                showModalBottomSheet<dynamic>(
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  context: context,
+                  backgroundColor: Colors.blueGrey.shade500,
+                  builder: (BuildContext context) {
+                    return Wrap(
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                      width: 3,
+                                    )),
+                                fillColor: Colors.blueGrey.shade200,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Meeting Name',
+                                labelStyle: const TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.datetime,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                      width: 3,
+                                    )),
+                                fillColor: Colors.blueGrey.shade200,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Start Time',
+                                labelStyle: const TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.datetime,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                      width: 3,
+                                    )),
+                                fillColor: Colors.blueGrey.shade200,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'End Time',
+                                labelStyle: const TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                      width: 3,
+                                    )),
+                                fillColor: Colors.blueGrey.shade200,
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: 'Invite Members',
+                                labelStyle: const TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            ElevatedButton(
+                              style: style2,
+                              child: const Text('Add'),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            ElevatedButton(
+                              style: style2,
+                              child: const Text('Cancel'),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text('Add')),
           const SizedBox(
             width: 70,
           ),
@@ -62,6 +210,16 @@ class _EventStates extends State<Events> {
         ]),
       ],
     ));
+  }
+
+  Future<void> getDataFromDB() async {
+    await db.collection("meetings").get().then((event) {
+      for (var doc in event.docs) {
+        print(doc.data()['eventName']);
+        print(doc.data()['timeStart']);
+        print(doc.data()['timeEnd']);
+      }
+    });
   }
 }
 

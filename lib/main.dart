@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey.shade500,
       ),
       body: const GoogleSignInWidget(),
     ));
