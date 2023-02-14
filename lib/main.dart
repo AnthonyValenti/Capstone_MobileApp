@@ -83,7 +83,6 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
                             signedIn = true;
                             name = user!.displayName;
                           });
-                          print(user?.displayName);
                         }
                       } catch (e) {
                         if (e is FirebaseAuthException) {
