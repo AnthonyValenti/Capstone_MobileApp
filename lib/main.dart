@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey.shade500,
       ),
       body: const GoogleSignInWidget(),
     ));
@@ -83,7 +83,6 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
                             signedIn = true;
                             name = user!.displayName;
                           });
-                          print(user?.displayName);
                         }
                       } catch (e) {
                         if (e is FirebaseAuthException) {

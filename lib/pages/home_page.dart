@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey.shade500,
       ),
       body: const MyStatefulWidget(),
     ));
@@ -36,9 +36,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
-        textStyle: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        fixedSize: const Size(300, 80));
+      textStyle: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      fixedSize: const Size(300, 80),
+    );
 
     return Center(
       child: Column(

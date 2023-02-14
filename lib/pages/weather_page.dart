@@ -18,7 +18,7 @@ class WeatherPage extends StatelessWidget {
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey.shade500,
       ),
       body: const WeatherStates(),
     );
@@ -38,12 +38,18 @@ class _TempState extends State<WeatherStates> {
   double? _maxTemp = 0;
   double? _currTemp = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    getWeather();
+  }
+
   double roundDouble(double value, int places) {
     num mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
   }
 
-  void getWeather() async {
+  Future<void> getWeather() async {
     Weather w = await wf.currentWeatherByCityName("Toronto");
     if (mounted) {
       setState(() {
@@ -64,7 +70,6 @@ class _TempState extends State<WeatherStates> {
 
   @override
   Widget build(BuildContext context) {
-    getWeather();
     final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(
         fontSize: 25,
@@ -83,25 +88,25 @@ class _TempState extends State<WeatherStates> {
             onPressed: () {},
             child: Text("Current: $_currTemp °C"),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 60),
           ElevatedButton(
             style: style,
             onPressed: () {},
             child: Text("Feels Like: $_feelsLike °C"),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 60),
           ElevatedButton(
             style: style,
             onPressed: () {},
             child: Text("Min: $_minTemp °C"),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 60),
           ElevatedButton(
             style: style,
             onPressed: () {},
             child: Text("Max: $_maxTemp °C"),
           ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 60),
         ],
       ),
     );
