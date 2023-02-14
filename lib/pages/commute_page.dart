@@ -7,6 +7,7 @@ class CommutePage extends StatefulWidget {
   const CommutePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
@@ -47,89 +48,87 @@ class _MyAppState extends State<CommutePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Commute'),
-          backgroundColor: Colors.cyan,
-        ),
-        body: Stack(
-          children: <Widget>[
-            GoogleMap(
-              polylines: Set<Polyline>.of(polylines.values),
-              onMapCreated: _onMapCreated,
-              mapType: _currentMapType, // Map type
-              markers: _markers, // markers
-              onCameraMove: _onCameraMove, // Moves camera
-              myLocationEnabled: true, // shows user location
-              rotateGesturesEnabled: true,
-              scrollGesturesEnabled: true,
-              tiltGesturesEnabled: true,
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 16.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Commute'),
+        backgroundColor: Colors.cyan,
+      ),
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            polylines: Set<Polyline>.of(polylines.values),
+            onMapCreated: _onMapCreated,
+            mapType: _currentMapType, // Map type
+            markers: _markers, // markers
+            onCameraMove: _onCameraMove, // Moves camera
+            myLocationEnabled: true, // shows user location
+            rotateGesturesEnabled: true,
+            scrollGesturesEnabled: true,
+            tiltGesturesEnabled: true,
+            // ignore: prefer_const_constructors
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 16.0,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: FloatingActionButton(
+                      heroTag: "btn1",
+                      onPressed: _onMapTypeButtonPressed,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      backgroundColor: Colors.cyan,
+                      child: const Icon(Icons.map, size: 24.0),
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: FloatingActionButton(
+                      heroTag: "btn2",
+                      onPressed: _onAddMarkerButtonPressed,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      backgroundColor: Colors.cyan,
+                      child: const Icon(Icons.add_location, size: 24.0),
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: FloatingActionButton(
+                      heroTag: "btn3",
+                      onPressed: _gotowork,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      backgroundColor: Colors.red,
+                      child: const Icon(Icons.work, size: 24.0),
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: FloatingActionButton(
+                      heroTag: "btn4",
+                      onPressed: _gotoPlace,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      backgroundColor: Colors.green,
+                      child: const Icon(Icons.home, size: 24.0),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: FloatingActionButton(
-                        heroTag: "btn1",
-                        onPressed: _onMapTypeButtonPressed,
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                        backgroundColor: Colors.cyan,
-                        child: const Icon(Icons.map, size: 24.0),
-                      ),
-                    ),
-                    SizedBox(height: 5.0),
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: FloatingActionButton(
-                        heroTag: "btn2",
-                        onPressed: _onAddMarkerButtonPressed,
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                        backgroundColor: Colors.cyan,
-                        child: const Icon(Icons.add_location, size: 24.0),
-                      ),
-                    ),
-                    SizedBox(height: 5.0),
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: FloatingActionButton(
-                        heroTag: "btn3",
-                        onPressed: _gotowork,
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                        backgroundColor: Colors.red,
-                        child: const Icon(Icons.work, size: 24.0),
-                      ),
-                    ),
-                    SizedBox(height: 5.0),
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: FloatingActionButton(
-                        heroTag: "btn4",
-                        onPressed: _gotoPlace,
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                        backgroundColor: Colors.green,
-                        child: const Icon(Icons.home, size: 24.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
