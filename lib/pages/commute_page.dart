@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -18,21 +20,20 @@ class _MyAppState extends State<CommutePage> {
   PolylinePoints polylinePoints = PolylinePoints();
 
   // Work
-  static LatLng _work = LatLng(43.6577, -79.3788);
+  static LatLng _work = const LatLng(43.6577, -79.3788);
   static final CameraPosition _camWork = CameraPosition(
     target: _work,
     zoom: 16,
   );
 
   // Home
-  static LatLng _home = LatLng(43.734664846231205, -79.37423021927064);
+  static LatLng _home = const LatLng(43.734664846231205, -79.37423021927064);
   static final CameraPosition _camHome = CameraPosition(
     target: _home,
     zoom: 16,
   );
 
-  static const LatLng _center =
-      const LatLng(43.734664846231205, -79.37423021927064);
+  static const LatLng _center = LatLng(43.734664846231205, -79.37423021927064);
   // Code added
   // Adding mapType
   MapType _currentMapType = MapType.normal;
@@ -92,7 +93,7 @@ class _MyAppState extends State<CommutePage> {
                       child: const Icon(Icons.map, size: 24.0),
                     ),
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   SizedBox(
                     width: 48,
                     height: 48,
@@ -104,7 +105,7 @@ class _MyAppState extends State<CommutePage> {
                       child: const Icon(Icons.add_location, size: 24.0),
                     ),
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   SizedBox(
                     width: 48,
                     height: 48,
@@ -116,7 +117,7 @@ class _MyAppState extends State<CommutePage> {
                       child: const Icon(Icons.work, size: 24.0),
                     ),
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   SizedBox(
                     width: 48,
                     height: 48,
@@ -150,9 +151,9 @@ class _MyAppState extends State<CommutePage> {
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId('work'),
+        markerId: const MarkerId('work'),
         position: _work,
-        infoWindow: InfoWindow(
+        infoWindow: const InfoWindow(
           title: 'Work',
         ),
       ));
@@ -167,9 +168,9 @@ class _MyAppState extends State<CommutePage> {
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId('home'),
+        markerId: const MarkerId('home'),
         position: _home,
-        infoWindow: InfoWindow(
+        infoWindow: const InfoWindow(
           title: 'Home',
         ),
       ));
@@ -181,7 +182,6 @@ class _MyAppState extends State<CommutePage> {
       _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
           : MapType.normal;
-      print(_currentMapType);
     });
   }
 
@@ -189,9 +189,9 @@ class _MyAppState extends State<CommutePage> {
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId('destination'),
+        markerId: const MarkerId('destination'),
         position: _lastMapPosition,
-        infoWindow: InfoWindow(
+        infoWindow: const InfoWindow(
           title: 'Destination',
         ),
         icon: BitmapDescriptor.defaultMarker,
