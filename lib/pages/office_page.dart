@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 const List<String> colorList = <String>['White', 'Blue', 'Red', 'Purple'];
 
