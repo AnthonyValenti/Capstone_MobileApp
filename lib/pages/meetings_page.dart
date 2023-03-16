@@ -43,6 +43,7 @@ class _EventStates extends State<Events> {
   var timeEnd;
 
   getDataFromDB() async {
+    meetings.clear();
     var results = await db.collection("meetings").get();
     if (mounted) {
       setState(() {
@@ -64,7 +65,6 @@ class _EventStates extends State<Events> {
     dateController.text = "Select Date";
     dayTimeStart.text = "Set Start Time";
     dayTimeEnd.text = "Set End Time";
-    meetings.clear();
     getDataFromDB();
     super.initState();
   }
@@ -81,6 +81,12 @@ class _EventStates extends State<Events> {
       textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       fixedSize: const Size(150, 50),
+      backgroundColor: Colors.blueGrey.shade200,
+    );
+    final ButtonStyle style3 = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      fixedSize: const Size(300, 70),
       backgroundColor: Colors.blueGrey.shade200,
     );
     return SingleChildScrollView(
@@ -123,6 +129,11 @@ class _EventStates extends State<Events> {
                                 height: 50,
                               ),
                               TextFormField(
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                                 controller: nameController,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -290,28 +301,6 @@ class _EventStates extends State<Events> {
                               const SizedBox(
                                 height: 30,
                               ),
-                              TextFormField(
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: const BorderSide(
-                                        color: Colors.white,
-                                        width: 3,
-                                      )),
-                                  fillColor: Colors.blueGrey.shade200,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'Invite Members',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
                               const SizedBox(
                                 height: 50,
                               ),
@@ -327,6 +316,13 @@ class _EventStates extends State<Events> {
                                           "${pickedDate?.day}/${pickedDate?.month}/${pickedDate?.year} ${timeEnd.hour}:${timeEnd.minute}:00",
                                     });
                                     Navigator.pop(context);
+                                    setState(() {
+                                      nameController.text = "";
+                                      dateController.text = 'Select Data';
+                                      dayTimeStart.text = 'Set Start Time';
+                                      dayTimeEnd.text = 'Set End Time';
+                                      getDataFromDB();
+                                    });
                                   }),
                               const SizedBox(
                                 height: 30,
@@ -336,7 +332,10 @@ class _EventStates extends State<Events> {
                                 child: const Text('Cancel'),
                                 onPressed: () {
                                   setState(() {
-                                    dayTimeStart.text = "Set Start Time";
+                                    nameController.text = "";
+                                    dateController.text = 'Select Data';
+                                    dayTimeStart.text = 'Set Start Time';
+                                    dayTimeEnd.text = 'Set End Time';
                                   });
                                   Navigator.pop(context);
                                 },
@@ -370,19 +369,73 @@ class _EventStates extends State<Events> {
                     return StatefulBuilder(
                         builder: (BuildContext context, StateSetter setState) {
                       return Wrap(
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: const <Widget>[
-                              SizedBox(
-                                height: 50,
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                            ],
-                          ),
+                        children: [
+                          ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(8),
+                              itemCount: meetings.length,
+                              itemBuilder: (BuildContext context, index) {
+                                return Column(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(10)),
+                                    ElevatedButton(
+                                      onPressed: () => showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text('Warning'),
+                                          content: Text(
+                                              'You are about to delete ${meetings[index].eventName}. Would you like to conintue?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                              child: const Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context, 'OK');
+                                                db
+                                                    .collection("meetings")
+                                                    .where('eventName',
+                                                        isEqualTo:
+                                                            meetings[index]
+                                                                .eventName)
+                                                    .get()
+                                                    .then((value) => value.docs
+                                                            .forEach((element) {
+                                                          element.reference
+                                                              .delete();
+                                                        }));
+                                                setState(() {
+                                                  getDataFromDB();
+                                                });
+                                              },
+                                              child: const Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      style: style3,
+                                      child: Text(
+                                        meetings[index].eventName,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                );
+                              }),
+                          const Padding(padding: EdgeInsets.all(20)),
                         ],
                       );
                     });
