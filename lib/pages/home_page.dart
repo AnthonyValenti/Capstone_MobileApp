@@ -62,7 +62,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 MaterialPageRoute(builder: (context) => const WeatherPage()),
               );
             },
-            label: const Text(' Weather'),
+            label: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  ' Weather',
+                )),
             icon: const ImageIcon(
               AssetImage("images/cloudy.png"),
               size: 40,
@@ -78,7 +82,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 MaterialPageRoute(builder: (context) => const MeetingsPage()),
               );
             },
-            label: const Text(' Meetings'),
+            label: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  ' Meetings',
+                )),
             icon: const ImageIcon(
               AssetImage("images/calendar.png"),
               size: 40,
@@ -94,7 +102,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 MaterialPageRoute(builder: (context) => const TeamPage()),
               );
             },
-            label: const Text(' Team'),
+            label: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  ' Team',
+                )),
             icon: const ImageIcon(
               AssetImage("images/messenger.png"),
               size: 40,
@@ -110,7 +122,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 MaterialPageRoute(builder: (context) => const CommutePage()),
               );
             },
-            label: const Text(' Commute'),
+            label: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  ' Commute',
+                )),
             icon: const ImageIcon(
               AssetImage("images/map.png"),
               size: 40,
@@ -126,7 +142,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 MaterialPageRoute(builder: (context) => const OfficePage()),
               );
             },
-            label: const Text(' Office'),
+            label: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  ' Office',
+                )),
             icon: const ImageIcon(
               AssetImage("images/settings.png"),
               size: 40,
