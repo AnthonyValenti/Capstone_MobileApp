@@ -22,15 +22,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      appBar: AppBar(
-        title: const Text('Login',
-            style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
-        backgroundColor: Colors.blueGrey.shade500,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/bkg2.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const GoogleSignInWidget(),
       ),
-      body: const GoogleSignInWidget(),
     ));
   }
 }
@@ -44,8 +44,39 @@ class GoogleSignInWidget extends StatefulWidget {
 
 class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
   bool signedIn = false;
+  bool visBool = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
   User? user;
+  User? emailUser;
   String? name = "";
+
+  Future<void> login() async {
+    try {
+      emailUser = (await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: emailController.text, password: passController.text))
+          .user;
+      login();
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        visBool = true;
+      });
+    }
+    if (user != null || emailUser != null) {
+      setState(() {
+        signedIn = true;
+      });
+      if (signedIn == true) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +85,96 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const Text(
-            "Welcome!",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 50),
-          const Text(
-            "Login to continue",
+            "GK02: Smart System",
             style: TextStyle(
               fontSize: 30,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
             ),
           ),
-          const SizedBox(height: 200),
+          const SizedBox(height: 50),
+          Container(
+            height: 50,
+            width: 50,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/login.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 60),
+          TextField(
+            controller: emailController,
+            cursorColor: Colors.white,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            onSubmitted: (value) async {},
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              hintText: 'email',
+              hintStyle: const TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              filled: true,
+              contentPadding: const EdgeInsets.all(16),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          TextField(
+            obscureText: true,
+            controller: passController,
+            cursorColor: Colors.white,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            onSubmitted: (value) async {},
+            keyboardType: TextInputType.visiblePassword,
+            decoration: InputDecoration(
+              hintText: 'password',
+              hintStyle: const TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              filled: true,
+              contentPadding: const EdgeInsets.all(16),
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, fixedSize: const Size(300, 50)),
+            onPressed: () {
+              login();
+            },
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           SizedBox(
               width: 300,
               height: 80,
@@ -77,31 +186,25 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
                       try {
                         user = await Authentication.signInWithGoogle(
                             context: context);
-
-                        if (user != null && mounted) {
-                          setState(() {
-                            signedIn = true;
-                            name = user!.displayName;
-                          });
-                        }
+                        login();
                       } catch (e) {
                         if (e is FirebaseAuthException) {
                           print(e.message!);
                         }
                       }
-                      if (signedIn == true) {
-                        // ignore: use_build_context_synchronously
-                        Navigator.pop(context);
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                        );
-                      }
                     },
                   ))),
-          const SizedBox(height: 100),
+          const SizedBox(height: 20),
+          if (visBool == true)
+            const Text(
+              'Incorrect username or email',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          const SizedBox(height: 50),
         ],
       ),
     );
