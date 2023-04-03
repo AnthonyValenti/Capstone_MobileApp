@@ -17,8 +17,14 @@ class OfficePage extends StatelessWidget {
                 color: Colors.white)),
         backgroundColor: Colors.blueGrey.shade500,
       ),
-      body: const Center(
-        child: SwitchExample(),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/bkg5.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const SwitchExample(),
       ),
     );
   }
