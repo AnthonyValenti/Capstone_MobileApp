@@ -128,176 +128,194 @@ class _EventStates extends State<Events> {
                               const SizedBox(
                                 height: 50,
                               ),
-                              TextFormField(
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                                controller: nameController,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: const BorderSide(
-                                        color: Colors.white,
-                                        width: 3,
-                                      )),
-                                  fillColor: Colors.blueGrey.shade200,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: 'Meeting Name',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.datetime,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: const BorderSide(
-                                        color: Colors.white,
-                                        width: 3,
-                                      )),
-                                  fillColor: Colors.blueGrey.shade200,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelText: dateController.text,
-                                  labelStyle: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                readOnly: true,
-                                onTap: () async {
-                                  pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(2020),
-                                      lastDate: DateTime(2101));
-                                  if (pickedDate != null) {
-                                    String formattedDate =
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(pickedDate!);
-                                    setState(() {
-                                      dateController.text =
-                                          formattedDate; //set foratted date to TextField value.
-                                    });
-                                  }
-                                },
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              TextFormField(
-                                  keyboardType: TextInputType.datetime,
-                                  decoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                          width: 3,
-                                        )),
-                                    fillColor: Colors.blueGrey.shade200,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    labelText: dayTimeStart.text,
-                                    labelStyle: const TextStyle(
-                                      fontSize: 25,
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
-                                  ),
-                                  readOnly: true,
-                                  onTap: () async {
-                                    timeStart = await showTimePicker(
-                                        context: context,
-                                        initialTime: timeOfDay);
-                                    if (timeStart != null) {
-                                      setState(() {
-                                        if (timeStart.hour < 10 &&
-                                            timeStart.minute < 10) {
-                                          dayTimeStart.text =
-                                              "0${timeStart.hour}:0${timeStart.minute}";
-                                        }
-                                        if (timeStart.hour < 10 &&
-                                            timeStart.minute > 10) {
-                                          dayTimeStart.text =
-                                              "0${timeStart.hour}:${timeStart.minute}";
-                                        }
-                                        if (timeStart.hour > 10 &&
-                                            timeStart.minute < 10) {
-                                          dayTimeStart.text =
-                                              "${timeStart.hour}:0${timeStart.minute}";
-                                        } else {
-                                          dayTimeStart.text =
-                                              "${timeStart.hour}:${timeStart.minute}";
-                                        }
-                                      });
-                                    }
-                                  }),
+                                    controller: nameController,
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                            color: Colors.white,
+                                            width: 3,
+                                          )),
+                                      fillColor: Colors.blueGrey.shade200,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      labelText: 'Meeting Name',
+                                      labelStyle: const TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )),
                               const SizedBox(
                                 height: 30,
                               ),
-                              TextFormField(
-                                  keyboardType: TextInputType.datetime,
-                                  decoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.datetime,
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                            color: Colors.white,
+                                            width: 3,
+                                          )),
+                                      fillColor: Colors.blueGrey.shade200,
+                                      filled: true,
+                                      border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
+                                      ),
+                                      labelText: dateController.text,
+                                      labelStyle: const TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    readOnly: true,
+                                    onTap: () async {
+                                      pickedDate = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(2020),
+                                          lastDate: DateTime(2101));
+                                      if (pickedDate != null) {
+                                        String formattedDate =
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(pickedDate!);
+                                        setState(() {
+                                          dateController.text =
+                                              formattedDate; //set foratted date to TextField value.
+                                        });
+                                      }
+                                    },
+                                  )),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: TextFormField(
+                                      keyboardType: TextInputType.datetime,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 3,
+                                            )),
+                                        fillColor: Colors.blueGrey.shade200,
+                                        filled: true,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        labelText: dayTimeStart.text,
+                                        labelStyle: const TextStyle(
+                                          fontSize: 25,
                                           color: Colors.white,
-                                          width: 3,
-                                        )),
-                                    fillColor: Colors.blueGrey.shade200,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    labelText: dayTimeEnd.text,
-                                    labelStyle: const TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  readOnly: true,
-                                  onTap: () async {
-                                    timeEnd = await showTimePicker(
-                                        context: context,
-                                        initialTime: timeOfDay);
-                                    if (timeEnd != null) {
-                                      setState(() {
-                                        if (timeEnd.hour < 10 &&
-                                            timeEnd.minute < 10) {
-                                          dayTimeEnd.text =
-                                              "0${timeEnd.hour}:0${timeEnd.minute}";
+                                        ),
+                                      ),
+                                      readOnly: true,
+                                      onTap: () async {
+                                        timeStart = await showTimePicker(
+                                            context: context,
+                                            initialTime: timeOfDay);
+                                        if (timeStart != null) {
+                                          setState(() {
+                                            if (timeStart.hour < 10 &&
+                                                timeStart.minute < 10) {
+                                              dayTimeStart.text =
+                                                  "0${timeStart.hour}:0${timeStart.minute}";
+                                            }
+                                            if (timeStart.hour < 10 &&
+                                                timeStart.minute > 10) {
+                                              dayTimeStart.text =
+                                                  "0${timeStart.hour}:${timeStart.minute}";
+                                            }
+                                            if (timeStart.hour > 10 &&
+                                                timeStart.minute < 10) {
+                                              dayTimeStart.text =
+                                                  "${timeStart.hour}:0${timeStart.minute}";
+                                            } else {
+                                              dayTimeStart.text =
+                                                  "${timeStart.hour}:${timeStart.minute}";
+                                            }
+                                          });
                                         }
-                                        if (timeEnd.hour < 10 &&
-                                            timeEnd.minute > 10) {
-                                          dayTimeEnd.text =
-                                              "0${timeEnd.hour}:${timeEnd.minute}";
+                                      })),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: TextFormField(
+                                      keyboardType: TextInputType.datetime,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: const BorderSide(
+                                              color: Colors.white,
+                                              width: 3,
+                                            )),
+                                        fillColor: Colors.blueGrey.shade200,
+                                        filled: true,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        labelText: dayTimeEnd.text,
+                                        labelStyle: const TextStyle(
+                                          fontSize: 25,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      readOnly: true,
+                                      onTap: () async {
+                                        timeEnd = await showTimePicker(
+                                            context: context,
+                                            initialTime: timeOfDay);
+                                        if (timeEnd != null) {
+                                          setState(() {
+                                            if (timeEnd.hour < 10 &&
+                                                timeEnd.minute < 10) {
+                                              dayTimeEnd.text =
+                                                  "0${timeEnd.hour}:0${timeEnd.minute}";
+                                            }
+                                            if (timeEnd.hour < 10 &&
+                                                timeEnd.minute > 10) {
+                                              dayTimeEnd.text =
+                                                  "0${timeEnd.hour}:${timeEnd.minute}";
+                                            }
+                                            if (timeEnd.hour > 10 &&
+                                                timeEnd.minute < 10) {
+                                              dayTimeEnd.text =
+                                                  "${timeEnd.hour}:0${timeEnd.minute}";
+                                            } else {
+                                              dayTimeEnd.text =
+                                                  "${timeEnd.hour}:${timeEnd.minute}";
+                                            }
+                                          });
                                         }
-                                        if (timeEnd.hour > 10 &&
-                                            timeEnd.minute < 10) {
-                                          dayTimeEnd.text =
-                                              "${timeEnd.hour}:0${timeEnd.minute}";
-                                        } else {
-                                          dayTimeEnd.text =
-                                              "${timeEnd.hour}:${timeEnd.minute}";
-                                        }
-                                      });
-                                    }
-                                  }),
+                                      })),
                               const SizedBox(
                                 height: 30,
                               ),
@@ -409,7 +427,7 @@ class _EventStates extends State<Events> {
                                                               .delete();
                                                         }));
                                                 setState(() {
-                                                  getDataFromDB();
+                                                  meetings.removeAt(index);
                                                 });
                                               },
                                               child: const Text(

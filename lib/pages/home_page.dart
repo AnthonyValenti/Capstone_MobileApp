@@ -4,6 +4,7 @@ import 'package:flutter_application_1/pages/meetings_page.dart';
 import 'package:flutter_application_1/pages/office_page.dart';
 import 'package:flutter_application_1/pages/team_page.dart';
 import 'package:flutter_application_1/pages/weather_page.dart';
+import 'package:flutter_application_1/pages/reminder_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -153,6 +154,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               color: Colors.black,
             ),
           ),
+          const SizedBox(height: 30),
+          ElevatedButton.icon(
+              style: style,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RemindersPage()),
+                );
+              },
+              label: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    ' Reminders',
+                  )),
+              icon: const Icon(
+                Icons.notification_add_outlined,
+                size: 40,
+                color: Colors.black,
+              )),
         ],
       ),
     );

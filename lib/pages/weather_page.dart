@@ -167,7 +167,7 @@ class _TempState extends State<WeatherStates> {
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
                       )),
-                  const Text('Minimum',
+                  const Text('Min',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
@@ -185,7 +185,7 @@ class _TempState extends State<WeatherStates> {
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
                       )),
-                  const Text('Minimum',
+                  const Text('Max',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,

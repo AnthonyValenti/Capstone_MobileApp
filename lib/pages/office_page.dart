@@ -40,9 +40,10 @@ class SwitchExample extends StatefulWidget {
 class _SwitchExampleState extends State<SwitchExample> {
   bool light1 = false;
   bool light2 = false;
-  bool light3 = false;
   String selectedColor = colorList.first;
   Color selectedC = Colors.white;
+  String selectedColor2 = colorList.first;
+  Color selectedC2 = Colors.white;
   Map<String, dynamic> selectedColorRBG = {
     "r": 255,
     "g": 0,
@@ -177,6 +178,47 @@ class _SwitchExampleState extends State<SwitchExample> {
                       });
                     },
                   ))),
+          DropdownButton<String>(
+            value: selectedColor2,
+            icon: const Icon(Icons.palette_outlined),
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            underline: Container(
+              height: 2,
+              color: Colors.deepPurpleAccent,
+            ),
+            onChanged: (String? value) {
+              setState(() {
+                selectedColor2 = value!;
+                if (selectedColor2 == "White") {
+                  selectedC2 = Colors.white;
+                }
+                if (selectedColor == "Blue") {
+                  selectedC2 = Colors.blue;
+                }
+                if (selectedColor == "Purple") {
+                  selectedC2 = Colors.purple;
+                }
+                if (selectedColor == "Red") {
+                  selectedC2 = Colors.red;
+                }
+                selectedColorRBG = {
+                  "r": selectedC2.red,
+                  "g": selectedC2.green,
+                  "b": selectedC2.blue,
+                };
+              });
+            },
+            items: colorList.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
           const SizedBox(height: 70),
         ],
       ),

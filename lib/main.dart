@@ -104,62 +104,66 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
             ),
           ),
           const SizedBox(height: 60),
-          TextField(
-            controller: emailController,
-            cursorColor: Colors.white,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            onSubmitted: (value) async {},
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              hintText: 'email',
-              hintStyle: const TextStyle(
-                fontSize: 16,
-                color: Colors.white70,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-            ),
-          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: TextField(
+                controller: emailController,
+                cursorColor: Colors.white,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                onSubmitted: (value) async {},
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: 'email',
+                  hintStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white70,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  filled: true,
+                  contentPadding: const EdgeInsets.all(16),
+                ),
+              )),
           const SizedBox(
             height: 30,
           ),
-          TextField(
-            obscureText: true,
-            controller: passController,
-            cursorColor: Colors.white,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            onSubmitted: (value) async {},
-            keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecoration(
-              hintText: 'password',
-              hintStyle: const TextStyle(
-                fontSize: 16,
-                color: Colors.white70,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              filled: true,
-              contentPadding: const EdgeInsets.all(16),
-            ),
-          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: TextField(
+                obscureText: true,
+                controller: passController,
+                cursorColor: Colors.white,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                onSubmitted: (value) async {},
+                keyboardType: TextInputType.visiblePassword,
+                decoration: InputDecoration(
+                  hintText: 'password',
+                  hintStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white70,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  filled: true,
+                  contentPadding: const EdgeInsets.all(16),
+                ),
+              )),
           const SizedBox(
             height: 50,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, fixedSize: const Size(300, 50)),
+                backgroundColor: Colors.white, fixedSize: const Size(200, 50)),
             onPressed: () {
               login();
             },
@@ -176,8 +180,8 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
             height: 20,
           ),
           SizedBox(
-              width: 300,
-              height: 80,
+              width: 200,
+              height: 70,
               child: FittedBox(
                   fit: BoxFit.fill,
                   child: SignInButton(
