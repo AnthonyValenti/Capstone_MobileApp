@@ -1,16 +1,3 @@
-# flutter_application_1
+# Capstone Mobile Application
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This mobile application was made in collaboration with three other group members for our final engineering design project. For this project our group designed and impemented a smart reminder and notification system for a work environemnt. The system consisted of a cross-platform mobile application as well as a touchscreen "central hub" system designed using a Raspberry Pi 3. The main features our system provided were scheduling calender events, creating reminders, employee messaging, smart bulb control and checking the weather.
