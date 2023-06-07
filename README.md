@@ -5,3 +5,4 @@ This mobile application was made in collaboration with three other group members
 <br>
 
 
+![Screenshot 2023-06-07 at 2 13 23 PM](https://github.com/AnthonyValenti/Capstone_MobileApp/assets/57304403/f0a3a308-684d-46be-b3f6-951c7df53cc2)
